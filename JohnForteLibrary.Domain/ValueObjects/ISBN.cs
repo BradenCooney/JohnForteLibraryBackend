@@ -21,7 +21,7 @@ namespace JohnForteLibrary.Domain.ValueObjects
             long longIsbn = 0;
             bool result = long.TryParse(noXIsbn, out longIsbn);
 
-            result = (isbn.ToUpper().IndexOf('X') != isbn.Length - 1 && isbn.ToUpper().IndexOf('X') != -1);
+            result = (isbn.ToUpper().IndexOf('X') != isbn.Length - 1 || isbn.ToUpper().IndexOf('X') != -1);
 
             if (!result)
                 return Result.Failure<ISBN>("ISBN must be in a valid format: only use numbers and dashes");
@@ -36,7 +36,7 @@ namespace JohnForteLibrary.Domain.ValueObjects
             const int validShortIsbnLength = 10;
             const int validLongIsbnLength = 13;
 
-            return (isbn.Length != validShortIsbnLength && isbn.Length != validLongIsbnLength);
+            return (isbn.Length != validShortIsbnLength || isbn.Length != validLongIsbnLength);
         }
     }
 
